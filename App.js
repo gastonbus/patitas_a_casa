@@ -6,6 +6,7 @@ import Register from './src/screens/Register'
 import Home from './src/screens/Home'
 import Categories from './src/screens/Categories'
 import Pets from './src/screens/Pets'
+import PetDetails from './src/screens/PetDetails'
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
       {/* <Home /> */}
       {/* <Categories /> */}
       <Pets />
+      {/* <PetDetails /> */}
     </SafeAreaView>
   )
 }
@@ -22,7 +24,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.extraLightBlue,
+    backgroundColor: colors.ultraLightBlue,
     alignItems: 'center',
     justifyContent: 'center',
   },
