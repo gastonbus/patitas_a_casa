@@ -2,15 +2,18 @@ import { useState } from 'react';
 import { Button, TextInput, Text } from 'react-native-paper';
 import { colors } from '../theme/colors';
 import { View, StyleSheet } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
+
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
   return (
-    <>
+    <View style={styles.container}>
       <View style={styles.title}>
         <Text variant="headlineLarge" style={{ color: colors.darkBlue }}>
           Bienvenido a...
@@ -31,9 +34,9 @@ const Login = () => {
         onChangeText={(text) => setEmail(text)}
       />
       {
-      //TODO: <HelperText type="error" visible={hasErrors()}>
-      // Email address is invalid!
-      // </HelperText>
+        //TODO: <HelperText type="error" visible={hasErrors()}>
+        // Email address is invalid!
+        // </HelperText>
       }
       <TextInput
         label="Password"
@@ -53,7 +56,6 @@ const Login = () => {
           />
         }
       />
-
       <Button
         mode="contained"
         buttonColor={colors.lightBlue}
@@ -63,24 +65,29 @@ const Login = () => {
       >
         Ingresar
       </Button>
-
       <View style={styles.registerArea}>
         <Text>Aún no tenés una cuenta?</Text>
         <Button
           mode="text"
           textColor={colors.darkBlue}
-          onPress={() => console.log('Se presionó Registrate')}
+          onPress={() => navigation.navigate("Register")}
         >
           Registrate!
         </Button>
       </View>
-    </>
+    </View>
   );
 };
 
 export default Login;
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+  },
+
   title: {
     marginBottom: 15,
     alignItems: 'center',

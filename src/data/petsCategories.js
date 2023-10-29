@@ -3,5 +3,4 @@ export const petsCategories = [
   'Felino',
   'Ave',
   'Roedor',
-  'Otro'
 ]

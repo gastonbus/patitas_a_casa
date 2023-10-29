@@ -1,12 +1,17 @@
 /* eslint-disable no-undef */
 import { Image } from 'react-native';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Text, Button } from 'react-native-paper';
 import { colors } from '../theme/colors';
+import { useNavigation } from '@react-navigation/native';
+import { ScrollView } from 'react-native';
 
 const Home = () => {
+
+  const navigation = useNavigation();
+
   return (
-    <>
+    <ScrollView contentContainerStyle={styles.container}>
       <Image style={styles.logo} source={require('./../../assets/logo.png')} />
       <Text variant="displayMedium" style={styles.textWelcome}>
         Bienvenido!
@@ -19,17 +24,21 @@ const Home = () => {
         buttonColor={colors.lightBlue}
         textColor={colors.yellow}
         style={styles.button}
-        onPress={() => console.log('Se presionó Buscar a mi mascota')}
+        onPress={() => navigation.navigate("Categories")}
       >
         <Text variant="headlineSmall" style={styles.buttonText}>Buscar a mi mascota</Text>
       </Button>
-    </>
+    </ScrollView>
   );
 };
 
 export default Home;
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    marginTop: 40
+  },
   logo: {
     width: 200,
     height: 200,

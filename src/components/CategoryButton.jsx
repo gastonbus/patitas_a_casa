@@ -2,15 +2,18 @@ import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { colors } from '../theme/colors';
 import PropTypes from 'prop-types';
+import { useNavigation } from '@react-navigation/native';
 
 const CategoryButton = ({ categoryName }) => {
+  const navigation = useNavigation();
+  console.log("categoryName desde CategoryButton", categoryName);
   return (
     <Button
       mode="contained"
       buttonColor={colors.darkBlue}
       textColor={colors.yellow}
       style={styles.button}
-      onPress={() => console.log("Se presionó ir a la categoría", categoryName)}
+      onPress={() => navigation.navigate('Pets', {categoryName} )}
     >
       {categoryName}
     </Button>

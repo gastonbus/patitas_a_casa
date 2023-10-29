@@ -7,7 +7,7 @@ import { petsCategories } from '../data/petsCategories';
 
 const Categories = () => {
   return (
-    <>
+    <View style={styles.container}>
       <Image style={styles.logo} source={require('./../../assets/logo.png')} />
 
       <Text variant="headlineMedium" style={styles.text}>
@@ -19,13 +19,17 @@ const Categories = () => {
           <CategoryButton key={category} categoryName={category} />
         ))}
       </View>
-    </>
+    </View>
   );
 };
 
 export default Categories;
 
 const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    marginTop: 20
+  },
   logo: {
     width: 180,
     height: 180,

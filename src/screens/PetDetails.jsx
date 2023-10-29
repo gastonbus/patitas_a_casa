@@ -1,45 +1,43 @@
+/* eslint-disable react/prop-types */
 import { StyleSheet, View, Image, Pressable, ScrollView } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import { colors } from '../theme/colors';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
-const PetDetails = () => {
+const PetDetails = ({route}) => {
+  const { pet } = route.params;
+
+  const yesIcon = <AntDesign name="checkcircle" size={14} color={colors.darkOlive} />
+  const noIcon = <AntDesign name="closecircle" size={14} color={colors.red} />
+
   return (
-    <SafeAreaView>
+    <>
       <ScrollView>
         <View style={styles.container}>
           <Image
             style={styles.petImage}
             source={{
-              uri: 'https://images.unsplash.com/photo-1453227588063-bb302b62f50b?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+              uri: pet.image,
             }}
           />
           <View style={styles.descriptionContainer}>
             <Text variant="titleMedium" style={{ textAlign: 'center' }}>
-              Encontrado el día {'27/10/23'} en {'Mar de Plata'},{' '}
-              {'Buenos Aires'}.
+              Encontrado el día {pet.dateFound} en {pet.city},{pet.province}.
             </Text>
             <Text variant="bodyLarge" style={styles.descriptionText}>
-              {
-                'Cachorro de raza pequeña encontrado en el parque. Muy juguetón y amigable.'
-              }
+              {pet.description}
             </Text>
-            <Text variant="bodyLarge">Tamaño: {'Grande'}.</Text>
-            <Text variant="bodyLarge">Edad estimada: {'8 años'}.</Text>
+            <Text variant="bodyLarge">Tamaño: {pet.size}.</Text>
+            <Text variant="bodyLarge">Edad estimada: {pet.estimatedAge}.</Text>
             <View style={{ flexDirection: 'row', marginTop: 5 }}>
               <Text variant="bodyLarge" style={{ marginRight: 10 }}>
                 Collar{' '}
-                <AntDesign
-                  name="checkcircle"
-                  size={14}
-                  color={colors.darkOlive}
-                />
+                {pet.leash === "Correa y collar" || pet.leash === "Solo collar" ? yesIcon : noIcon}
               </Text>
               <Text variant="bodyLarge" style={{ marginLeft: 10 }}>
                 Correa{' '}
-                <AntDesign name="closecircle" size={14} color={colors.red} />
+                {pet.leash === "Correa y collar" ? yesIcon : noIcon}
               </Text>
             </View>
           </View>
@@ -73,7 +71,7 @@ const PetDetails = () => {
           <Ionicons name="call" size={54} color={colors.darkOlive} />
         </Pressable>
       </View>
-    </SafeAreaView>
+    </>
   );
 };
 
@@ -114,6 +112,6 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
 });

@@ -2,8 +2,12 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import PropTypes from 'prop-types';
 import { Button, Card, Text } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native';
 
 const PetItem = ({ pet }) => {
+
+  const navigation = useNavigation();
+
   return (
     <Card
       mode="contained"
@@ -23,10 +27,7 @@ const PetItem = ({ pet }) => {
           mode="contained"
           buttonColor={colors.lightBlue}
           onPress={() =>
-            console.log(
-              'Se presionó ver detalle',
-              pet.id
-            )
+            navigation.navigate("PetDetails", {pet})
           }
         >
           Ver detalle
