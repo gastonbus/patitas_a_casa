@@ -3,6 +3,8 @@ import { Button, TextInput, Text } from 'react-native-paper';
 import { colors } from '../theme/colors';
 import { View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { signInWithEmailAndPassword } from '@firebase/auth';
+import { firebaseAuth } from '../firebase/firebaseAuth';
 
 const Login = () => {
 
@@ -11,6 +13,15 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+
+  const handleLogin = async () => {
+    try {
+      const response = await signInWithEmailAndPassword(firebaseAuth, email, password);
+      console.log(response);
+    } catch (error) {
+      console.log("Ocurrió un error al intentar ingresar:", error);
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -60,7 +71,7 @@ const Login = () => {
         mode="contained"
         buttonColor={colors.lightBlue}
         loading={false} //TODO: modificar luego colocandole una variable de estado
-        onPress={() => console.log('Pressed')}
+        onPress={handleLogin}
         style={styles.loginButton}
       >
         Ingresar

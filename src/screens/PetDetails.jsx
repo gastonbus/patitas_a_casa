@@ -1,15 +1,21 @@
 /* eslint-disable react/prop-types */
-import { StyleSheet, View, Image, Pressable, ScrollView } from 'react-native';
+import { StyleSheet, View, Image, Pressable, ScrollView, Linking } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import { colors } from '../theme/colors';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { useSelector } from 'react-redux';
 
-const PetDetails = ({route}) => {
-  const { pet } = route.params;
+const PetDetails = () => {
+
+  const pet = useSelector((state) => state.homeSlice.selectedPet);
 
   const yesIcon = <AntDesign name="checkcircle" size={14} color={colors.darkOlive} />
   const noIcon = <AntDesign name="closecircle" size={14} color={colors.red} />
+
+  const callNumber = () => {
+    Linking.openURL(`tel:${pet.contactNumber}`);
+  };
 
   return (
     <>
@@ -23,7 +29,7 @@ const PetDetails = ({route}) => {
           />
           <View style={styles.descriptionContainer}>
             <Text variant="titleMedium" style={{ textAlign: 'center' }}>
-              Encontrado el día {pet.dateFound} en {pet.city},{pet.province}.
+              Encontrado el día {pet.dateFound} en {pet.city}, {pet.province}.
             </Text>
             <Text variant="bodyLarge" style={styles.descriptionText}>
               {pet.description}
@@ -67,7 +73,7 @@ const PetDetails = ({route}) => {
             {'+5401234567'}
           </Text>
         </Text>
-        <Pressable onPress={() => console.log('Llamar al publicante')}>
+        <Pressable onPress={callNumber}>
           <Ionicons name="call" size={54} color={colors.darkOlive} />
         </Pressable>
       </View>

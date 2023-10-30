@@ -1,26 +1,44 @@
 /* eslint-disable react/prop-types */
 import { FlatList } from 'react-native';
-import { pets } from './../data/pets';
 import PetItem from '../components/PetItem';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import Search from '../components/Search';
 
-const Pets = ({ route }) => {
-  const { categoryName } = route.params;
+const Pets = () => {
+  const filteredPetsByCategory = useSelector(
+    (state) => state.homeSlice.filteredPetsByCategory
+  );
 
-  const filteredPets = pets.filter((pet) => pet.category === categoryName);
+  const [searchText, setSearchText] = useState('');
+
+  const [filteredPetsBySearch, setFilteredPetsBySearch] = useState(
+    filteredPetsByCategory
+  );
+
+  useEffect(() => {
+    setFilteredPetsBySearch(
+      filteredPetsByCategory.filter((pet) =>
+        pet.description.toLowerCase().includes(searchText.toLowerCase())
+      )
+    );
+  }, [filteredPetsByCategory, searchText]);
 
   return (
-    <FlatList
-      data={filteredPets}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <PetItem pet={item} />}
-      style={{ width: '100%' }}
-    />
+    <>
+      <Search
+        searchText={searchText}
+        setSearchText={setSearchText}
+        resultsLength={filteredPetsBySearch.length}
+      />
+      <FlatList
+        data={filteredPetsBySearch}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <PetItem pet={item} />}
+        style={{ width: '100%' }}
+      />
+    </>
   );
-};
-
-Pets.propTypes = {
-  categoryName: PropTypes.string.isRequired,
 };
 
 export default Pets;

@@ -1,27 +1,33 @@
+/* eslint-disable react/prop-types */
 import { StyleSheet } from 'react-native';
 import { Button } from 'react-native-paper';
 import { colors } from '../theme/colors';
-import PropTypes from 'prop-types';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { setCategory } from '../redux/slices/homeSlice';
 
 const CategoryButton = ({ categoryName }) => {
+
   const navigation = useNavigation();
-  console.log("categoryName desde CategoryButton", categoryName);
+  
+  const dispatch = useDispatch();
+
+  const onSelectCategory = () => {
+    dispatch(setCategory(categoryName));
+    navigation.navigate('Pets');
+  }
+
   return (
     <Button
       mode="contained"
       buttonColor={colors.darkBlue}
       textColor={colors.yellow}
       style={styles.button}
-      onPress={() => navigation.navigate('Pets', {categoryName} )}
+      onPress={onSelectCategory}
     >
       {categoryName}
     </Button>
   );
-};
-
-CategoryButton.propTypes = {
-  categoryName: PropTypes.string.isRequired,
 };
 
 export default CategoryButton;

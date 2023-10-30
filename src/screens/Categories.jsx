@@ -3,9 +3,13 @@ import { Image, StyleSheet, View } from 'react-native';
 import { colors } from '../theme/colors';
 import { Text } from 'react-native-paper';
 import CategoryButton from '../components/CategoryButton';
-import { petsCategories } from '../data/petsCategories';
+import { useSelector } from 'react-redux';
+
 
 const Categories = () => {
+
+  const petsCategories = useSelector((state) => state.homeSlice.categories);
+  
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require('./../../assets/logo.png')} />

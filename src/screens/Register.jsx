@@ -4,16 +4,30 @@ import { colors } from '../theme/colors';
 import { View, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
+import { createUserWithEmailAndPassword } from '@firebase/auth';
+import { firebaseAuth } from '../firebase/firebaseAuth';
 
 const Register = () => {
-
   const navigation = useNavigation();
 
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [contactNumber, setContactNumber] = useState('');
   const [password, setPassword] = useState('');
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
+
+  const handleRegister = async () => {
+    try {
+      const response = await createUserWithEmailAndPassword(
+        firebaseAuth,
+        email,
+        password
+      );
+      console.log(response);
+
+      navigation.navigate("Login");
+    } catch (error) {
+      console.log('Ocurrió un error en el registro:', error);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -22,32 +36,6 @@ const Register = () => {
       </Text>
 
       <TextInput
-        label="Nombre y Apellido"
-        value={name}
-        mode="outlined"
-        placeholder="Ingrese su nombre y apellido"
-        activeOutlineColor={colors.darkBlue}
-        outlineColor={colors.lightBlue}
-        style={styles.input}
-        onChangeText={(text) => setName(text)}
-      />
-      {
-        //TODO: <Text variant="bodySmall" style={{color: colors.red}}>Email no válido</Text>
-      }
-      <TextInput
-        label="Número de contacto"
-        value={contactNumber}
-        mode="outlined"
-        placeholder="Ingrese su número de teléfono"
-        activeOutlineColor={colors.darkBlue}
-        outlineColor={colors.lightBlue}
-        style={styles.input}
-        onChangeText={(text) => setContactNumber(text)}
-      />
-      {
-        //TODO: <Text variant="bodySmall" style={{color: colors.red}}>Email no válido</Text>
-      }
-            <TextInput
         label="Email"
         value={email}
         autoCapitalize="none"
@@ -84,7 +72,7 @@ const Register = () => {
         mode="contained"
         buttonColor={colors.lightBlue}
         loading={false} //TODO: modificar luego colocandole una variable de estado
-        onPress={() => console.log('Se presionó Resgistrarme')}
+        onPress={handleRegister}
         style={styles.loginButton}
       >
         Registrarme
@@ -94,7 +82,7 @@ const Register = () => {
         <Button
           mode="text"
           textColor={colors.darkBlue}
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => navigation.navigate('Login')}
         >
           Ingresá!
         </Button>
@@ -108,8 +96,8 @@ export default Register;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    justifyContent: "center",
-    marginTop: 40
+    justifyContent: 'center',
+    marginTop: 40,
   },
   title: {
     color: colors.darkBlue,

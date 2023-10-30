@@ -35,11 +35,11 @@ export const pets = [
     "description": "Gato adulto encontrado en una zona residencial. Se lleva bien con otros gatos.",
     "contactNumber": "+5402345678",
     "leash": "Solo collar",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 3,
@@ -56,11 +56,11 @@ export const pets = [
     "description": "Loro encontrado en un parque. Habla algunas palabras y es amigable con las personas.",
     "contactNumber": "+5403456789",
     "leash": "No",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 4,
@@ -77,11 +77,11 @@ export const pets = [
     "description": "Cachorro de raza grande encontrado en el parque. Necesita un hogar.",
     "contactNumber": "+5409876543",
     "leash": "Solo collar",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 5,
@@ -98,11 +98,11 @@ export const pets = [
     "description": "Gato adulto encontrado en una zona residencial. Se lleva bien con otros gatos.",
     "contactNumber": "+5408765432",
     "leash": "No",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 6,
@@ -119,11 +119,11 @@ export const pets = [
     "description": "Loro encontrado en un parque. Habla algunas palabras y es amigable con las personas.",
     "contactNumber": "+5407654321",
     "leash": "No",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 7,
@@ -140,11 +140,11 @@ export const pets = [
     "description": "Perro grande encontrado en la playa. Es amigable y juguetón.",
     "contactNumber": "+5406543210",
     "leash": "Collar y correa",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 8,
@@ -161,11 +161,11 @@ export const pets = [
     "description": "Conejillo de Indias encontrado en el jardín. Buscamos a su dueño.",
     "contactNumber": "+5405432109",
     "leash": "Solo collar",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 9,
@@ -182,11 +182,11 @@ export const pets = [
     "description": "Canario encontrado en un parque. Canta melodías hermosas.",
     "contactNumber": "+5404321098",
     "leash": "No",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 10,
@@ -203,11 +203,11 @@ export const pets = [
     "description": "Gato adulto encontrado en una zona residencial. Se lleva bien con otros gatos.",
     "contactNumber": "+5409876543",
     "leash": "Solo collar",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 11,
@@ -224,11 +224,11 @@ export const pets = [
     "description": "Cachorro de raza mediana encontrado en el parque. Necesita un hogar.",
     "contactNumber": "+5408765432",
     "leash": "Collar y correa",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 12,
@@ -245,11 +245,11 @@ export const pets = [
     "description": "Loro grande encontrado en un parque. Habla algunas palabras y es amigable con las personas.",
     "contactNumber": "+5407654321",
     "leash": "No",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 13,
@@ -266,11 +266,11 @@ export const pets = [
     "description": "Cachorro pequeño encontrado en el parque. Buscamos a su dueño.",
     "contactNumber": "+5406543210",
     "leash": "Collar y correa",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 14,
@@ -287,11 +287,11 @@ export const pets = [
     "description": "Gato adulto encontrado en una zona residencial. Se lleva bien con otros gatos.",
     "contactNumber": "+5405432109",
     "leash": "Solo collar",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 15,
@@ -308,11 +308,11 @@ export const pets = [
     "description": "Canario encontrado en un parque. Canta melodías hermosas.",
     "contactNumber": "+5404321098",
     "leash": "No",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 16,
@@ -329,11 +329,11 @@ export const pets = [
     "description": "Cachorro grande encontrado en el parque. Muy juguetón y amigable.",
     "contactNumber": "+5406543211",
     "leash": "Collar y correa",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 17,
@@ -350,11 +350,11 @@ export const pets = [
     "description": "Gato adulto encontrado en una zona residencial. Se lleva bien con otros gatos.",
     "contactNumber": "+5405432100",
     "leash": "Solo collar",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 18,
@@ -371,11 +371,11 @@ export const pets = [
     "description": "Canario encontrado en un parque. Canta melodías hermosas.",
     "contactNumber": "+5404321091",
     "leash": "No",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 19,
@@ -392,11 +392,11 @@ export const pets = [
     "description": "Perro grande encontrado en el parque. Es amigable y busca un hogar.",
     "contactNumber": "+5406543212",
     "leash": "Collar y correa",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 20,
@@ -413,11 +413,11 @@ export const pets = [
     "description": "Gato adulto encontrado en una zona residencial. Se lleva bien con otros gatos.",
     "contactNumber": "+5405432101",
     "leash": "Solo collar",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   },
   {
     "id": 21,
@@ -434,10 +434,10 @@ export const pets = [
     "description": "Canario encontrado en un parque. Canta melodías hermosas y busca un nuevo hogar.",
     "contactNumber": "+5404321092",
     "leash": "No",
+        "finder": "mascotero74@gmail.com",
     "dateFound": "27/09/2023",
     "specificDetails": "Tiene un ojo celeste y otro marron.",
     "color": "Marrón y negro",
     "breed": "Mestizo",
-
   }
 ]

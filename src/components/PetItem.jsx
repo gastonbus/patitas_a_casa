@@ -3,10 +3,18 @@ import { colors } from '../theme/colors';
 import PropTypes from 'prop-types';
 import { Button, Card, Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { setSelectedPet } from '../redux/slices/homeSlice';
 
 const PetItem = ({ pet }) => {
-
   const navigation = useNavigation();
+
+  const dispatch = useDispatch();
+
+  const onSelectPet = () => {
+    dispatch(setSelectedPet(pet));
+    navigation.navigate('PetDetails');
+  };
 
   return (
     <Card
@@ -26,9 +34,7 @@ const PetItem = ({ pet }) => {
         <Button
           mode="contained"
           buttonColor={colors.lightBlue}
-          onPress={() =>
-            navigation.navigate("PetDetails", {pet})
-          }
+          onPress={onSelectPet}
         >
           Ver detalle
         </Button>
