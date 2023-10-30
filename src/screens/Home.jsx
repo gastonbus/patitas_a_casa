@@ -21,7 +21,7 @@ const Home = () => {
       </Text>
       <Button
         mode="contained"
-        buttonColor={colors.lightBlue}
+        buttonColor={colors.darkBlue}
         textColor={colors.yellow}
         style={styles.button}
         onPress={() => navigation.navigate("Categories")}
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     padding: 5
   },
   buttonText: {
-    color: colors.yellow,
+    color: colors.ultraLightBlue,
     fontWeight: "bold",
   }
 });

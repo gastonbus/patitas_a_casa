@@ -1,29 +1,33 @@
 /* eslint-disable no-undef */
-import { Image, StyleSheet, View } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { colors } from '../theme/colors';
 import { Text } from 'react-native-paper';
 import CategoryButton from '../components/CategoryButton';
-import { useSelector } from 'react-redux';
-
+import { FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useGetCategoriesQuery } from '../services/pacApi';
 
 const Categories = () => {
 
-  const petsCategories = useSelector((state) => state.homeSlice.categories);
-  
+  const { data: petsCategories } = useGetCategoriesQuery();
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Image style={styles.logo} source={require('./../../assets/logo.png')} />
 
-      <Text variant="headlineMedium" style={styles.text}>
+      <Text variant="headlineSmall" style={styles.text}>
         ¿Qué tipo de mascota se te perdió?
       </Text>
 
-      <View style={styles.categoriesButtonsContainer}>
-        {petsCategories.map((category) => (
-          <CategoryButton key={category} categoryName={category} />
-        ))}
-      </View>
-    </View>
+      {/* <View style={styles.categoriesButtonsContainer}> */}
+      <FlatList
+        data={petsCategories}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => <CategoryButton categoryName={item} />}
+        style={styles.flatList}
+      />
+      {/* </View> */}
+    </SafeAreaView>
   );
 };
 
@@ -31,20 +35,19 @@ export default Categories;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    marginTop: 20
+    alignItems: 'center',
+    marginTop: 20,
   },
   logo: {
-    width: 180,
-    height: 180,
+    width: 140,
+    height: 140,
     borderRadius: 100,
     marginTop: 10,
     marginBottom: 15,
   },
-  categoriesButtonsContainer: {
+  flatList: {
     width: '100%',
-    alignItems: 'center',
-    marginTop: 10,
+    paddingVertical: 15,
   },
   text: {
     textAlign: 'center',

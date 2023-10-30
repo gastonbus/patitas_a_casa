@@ -34,6 +34,8 @@ export default CategoryButton;
 
 const styles = StyleSheet.create({
   button: {
+    alignSelf: "center",
+    height: 45,
     width: '60%',
     marginTop: 10,
   },

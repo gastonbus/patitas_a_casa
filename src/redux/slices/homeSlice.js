@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { petsCategories } from '../../data/petsCategories';
-import { pets } from '../../data/pets';
+import { petsCategories } from '../../data/petsCategories-borrar';
+import { pets } from '../../data/pets-borrar';
 
 const homeSlice = createSlice({
   name: 'home',
