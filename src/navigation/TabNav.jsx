@@ -18,7 +18,7 @@ const TabNav = () => {
             <MaterialIcons
               name="home"
               size={36}
-              color={focused ? colors.darkBlue : colors.lightBlue}
+              color={focused ? colors.darkBlue : colors.lightGray}
             />
           ),
         }}
@@ -31,7 +31,7 @@ const TabNav = () => {
             <MaterialIcons
               name="add-box"
               size={36}
-              color={focused ? colors.darkBlue : colors.lightBlue}
+              color={focused ? colors.darkBlue : colors.lightGray}
             />
           ),
         }}
@@ -44,7 +44,7 @@ const TabNav = () => {
             <MaterialIcons
               name="person"
               size={36}
-              color={focused ? colors.darkBlue : colors.lightBlue}
+              color={focused ? colors.darkBlue : colors.lightGray}
             />
           ),
         }}

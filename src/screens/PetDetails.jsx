@@ -5,8 +5,11 @@ import { colors } from '../theme/colors';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 const PetDetails = () => {
+
+  const navigation = useNavigation();
 
   const pet = useSelector((state) => state.homeSlice.selectedPet);
 
@@ -53,11 +56,7 @@ const PetDetails = () => {
         mode="contained"
         buttonColor={colors.lightBlue}
         style={styles.button}
-        onPress={() =>
-          console.log(
-            'Se presionó ver mapa (punto donde se encontró el animal).'
-          )
-        }
+        onPress={() => navigation.navigate("PetLoc") }
       >
         Ver ubicación en mapa
       </Button>

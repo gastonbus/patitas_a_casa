@@ -5,10 +5,14 @@ import { View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 import { firebaseAuth } from '../firebase/firebaseAuth';
+import { useDispatch } from 'react-redux';
+import { setIdToken, setUser } from '../redux/slices/authSlice';
 
 const Login = () => {
 
   const navigation = useNavigation();
+
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -18,6 +22,8 @@ const Login = () => {
     try {
       const response = await signInWithEmailAndPassword(firebaseAuth, email, password);
       console.log(response);
+      dispatch(setUser(response.user.email));
+      dispatch(setIdToken(response._tokenResponse.idToken))
     } catch (error) {
       console.log("Ocurrió un error al intentar ingresar:", error);
     }

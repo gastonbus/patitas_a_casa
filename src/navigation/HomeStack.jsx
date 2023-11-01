@@ -4,6 +4,7 @@ import Pets from '../screens/Pets';
 import PetDetails from '../screens/PetDetails';
 import Categories from '../screens/Categories';
 import { colors } from '../theme/colors';
+import PetLoc from '../screens/PetLoc';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,11 +24,12 @@ const HomeStack = () => {
       <Stack.Screen
         name="Home"
         component={Home}
-        options={{ headerTitle: 'Categorias' }}
+        options={{ headerTitle: 'Home' }}
       />
       <Stack.Screen name="Categories" component={Categories} />
       <Stack.Screen name="Pets" component={Pets} />
       <Stack.Screen name="PetDetails" component={PetDetails} />
+      <Stack.Screen name="PetLoc" component={PetLoc} />
     </Stack.Navigator>
   );
 };
