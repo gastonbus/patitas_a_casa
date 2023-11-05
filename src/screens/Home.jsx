@@ -7,7 +7,6 @@ import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native';
 
 const Home = () => {
-
   const navigation = useNavigation();
 
   return (
@@ -17,16 +16,20 @@ const Home = () => {
         Bienvenido!
       </Text>
       <Text variant="bodyLarge" style={styles.text}>
-        ¿Perdiste a tu mascota? Ingresá a buscarla haciendo click en el siguiente botón para ver si otro usuario la rescató. Ojalá la encuentres!
+        ¿Perdiste a tu mascota? Ingresá a buscarla haciendo click en el
+        siguiente botón para ver si otro usuario la rescató. Ojalá la
+        encuentres!
       </Text>
       <Button
         mode="contained"
         buttonColor={colors.darkBlue}
         textColor={colors.yellow}
         style={styles.button}
-        onPress={() => navigation.navigate("Categories")}
+        onPress={() => navigation.navigate('Categories')}
       >
-        <Text variant="headlineSmall" style={styles.buttonText}>Buscar a mi mascota</Text>
+        <Text variant="headlineSmall" style={styles.buttonText}>
+          Buscar a mi mascota
+        </Text>
       </Button>
     </ScrollView>
   );
@@ -37,7 +40,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    marginTop: 40
+    marginTop: 40,
   },
   logo: {
     width: 200,
@@ -51,14 +54,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: colors.darkBlue,
     margin: 10,
+    fontFamily: 'Agbalumo',
   },
   button: {
     width: '80%',
     marginTop: 15,
-    padding: 5
+    padding: 5,
   },
   buttonText: {
     color: colors.ultraLightBlue,
-    fontWeight: "bold",
-  }
+    fontWeight: 'bold',
+  },
 });

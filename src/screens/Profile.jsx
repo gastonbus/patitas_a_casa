@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     textAlign: 'center',
     color: colors.red,
+    fontFamily: 'Agbalumo',
   },
   logout: {
     flexDirection: 'row',

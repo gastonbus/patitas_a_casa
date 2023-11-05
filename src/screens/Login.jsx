@@ -24,7 +24,7 @@ const Login = () => {
         email,
         password
       );
-      // console.log(response);
+      console.log(response);
       dispatch(setUser(response.user.email));
       dispatch(setUid(response.user.uid));
       dispatch(setIdToken(response._tokenResponse.idToken));
