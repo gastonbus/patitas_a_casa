@@ -2,96 +2,126 @@ import { Pressable, StyleSheet, View, Image, ScrollView } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { colors } from '../theme/colors';
 import { PaperProvider, Text } from 'react-native-paper';
-import { useState } from 'react';
-import ProfileFieldModal from '../components/ProfileFieldModal';
+import { useDispatch, useSelector } from 'react-redux';
+import * as ImagePicker from 'expo-image-picker';
+import { useGetUserDetailsQuery, usePutUserMutation } from '../services/pacApi';
+import ProfileField from '../components/ProfileField';
+import { MaterialIcons } from '@expo/vector-icons';
+import { clearUser } from '../redux/slices/authSlice';
 
 const Profile = () => {
-  const defaultImage =
-    'https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp';
+  const uid = useSelector((state) => state.authSlice.uid);
+  const { data: userDetails, refetch } = useGetUserDetailsQuery(uid);
 
-  const [modalVisible, setModalVisible] = useState(false);
-  const [field, setField] = useState('');
-  const [newValueText, setNewValueText] = useState('');
-  
-  const showModal = (editingField) => {
-    setField(editingField);
-    setModalVisible(true);
+  // eslint-disable-next-line no-unused-vars
+  const [putUser, result] = usePutUserMutation();
+
+  const dispatch = useDispatch();
+
+  const onUpdateField = async (field, newValue) => {
+    try {
+      if (field === 'name') {
+        await putUser({
+          ...userDetails,
+          name: newValue,
+        });
+      }
+      if (field === 'image') {
+        await putUser({
+          ...userDetails,
+          image: newValue,
+        });
+      }
+      if (field === 'contactNumber') {
+        await putUser({
+          ...userDetails,
+          contactNumber: newValue,
+        });
+      }
+      refetch();
+    } catch (error) {
+      console.log('Ocurrió un error al intentar actualizar el campo:', error);
+    }
   };
-  const hideModal = () => {
-    setField('');
-    setModalVisible(false);
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+      base64: true,
+    });
+
+    // console.log(result);
+
+    if (!result.canceled) {
+      await onUpdateField(
+        'image',
+        `data:image/jpeg;base64,${result.assets[0].base64}`
+      );
+    }
+  };
+
+  const openCamera = async () => {
+    const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
+    console.log('permissionResult', permissionResult);
+    if (!permissionResult.granted) {
+      console.log('Permiso NO otorgado');
+    } else {
+      const result = await ImagePicker.launchCameraAsync({
+        base64: true,
+      });
+      console.log('result', result);
+
+      if (!result.canceled) {
+        await onUpdateField(
+          'image',
+          `data:image/jpeg;base64,${result.assets[0].base64}`
+        );
+        refetch();
+      }
+    }
   };
 
   return (
     <PaperProvider>
       <ScrollView style={styles.container}>
-        <ProfileFieldModal
-          modalVisible={modalVisible}
-          hideModal={hideModal}
-          newValueText={newValueText}
-          setNewValueText={setNewValueText}
-          field={field}
-        />
         <View style={styles.infoContainer}>
+          <Pressable onPress={() => dispatch(clearUser())}>
+            <View style={styles.logout}>
+              <Text style={{ color: colors.darkBlue }}>Logout </Text>
+              <MaterialIcons name="logout" size={24} color={colors.darkBlue} />
+            </View>
+          </Pressable>
           <Image
             style={styles.image}
             source={{
-              uri: defaultImage,
+              uri: userDetails?.image,
             }}
           />
           <View style={styles.buttonsContainer}>
-            <Pressable onPress={() => console.log('Tomar foto')}>
+            <Pressable onPress={openCamera}>
               <FontAwesome name="camera" size={36} color={colors.darkBlue} />
             </Pressable>
-            <Pressable onPress={() => console.log('Abrir galería')}>
+            <Pressable onPress={pickImage}>
               <FontAwesome name="picture-o" size={36} color={colors.darkBlue} />
             </Pressable>
           </View>
           <View style={styles.existingProfileDataContainer}>
-            <View style={styles.existingProfileDataLine}>
-              <Text variant="headlineSmall" style={styles.detailsText}>
-                {'Gaston' + ' ' + 'Bustamante'}
-              </Text>
-              <Pressable onPress={() => showModal("Nombre")}>
-                <FontAwesome
-                  name="edit"
-                  size={24}
-                  color={colors.ultraLightBlue}
-                  style={styles.editIcon}
-                />
-              </Pressable>
-            </View>
-            <View style={styles.existingProfileDataLine}>
-              <Text variant="bodyLarge" style={styles.detailsText}>
-                {'mail@mail.com'}
-              </Text>
-              <Pressable onPress={() => showModal("Email")}>
-                <FontAwesome
-                  name="edit"
-                  size={20}
-                  color={colors.ultraLightBlue}
-                  style={styles.editIcon}
-                />
-              </Pressable>
-            </View>
-            <View style={styles.existingProfileDataLine}>
-              <Text variant="bodyLarge" style={styles.detailsText}>
-                {'+541134658765'}
-              </Text>
-              <Pressable
-                onPress={() => showModal("Número de contacto")}
-              >
-                <FontAwesome
-                  name="edit"
-                  size={20}
-                  color={colors.ultraLightBlue}
-                  style={styles.editIcon}
-                />
-              </Pressable>
-            </View>
+            <ProfileField
+              field={'name'}
+              userDetails={userDetails}
+              onUpdateField={onUpdateField}
+            />
+            <ProfileField
+              field={'contactNumber'}
+              userDetails={userDetails}
+              onUpdateField={onUpdateField}
+            />
           </View>
           <Text variant="bodyLarge" style={styles.bottomText}>
-            Estos son los datos tuyos que tenemos registrados. Por favor,
+            Estos son tus datos registrados en Patitas a Casa. Por favor,
             mantenelos actualizados para facilitar el encuentro entre las
             mascotas y sus dueños!
           </Text>
@@ -114,7 +144,7 @@ const styles = StyleSheet.create({
   image: {
     height: 220,
     width: 220,
-    borderRadius: 100,
+    borderRadius: 200,
   },
   buttonsContainer: {
     width: 100,
@@ -130,21 +160,18 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
   },
-  detailsText: {
-    color: colors.ultraLightBlue,
-  },
   bottomText: {
     width: '80%',
     marginTop: 20,
     textAlign: 'center',
     color: colors.red,
   },
-  existingProfileDataLine: {
+  logout: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 5,
-  },
-  editIcon: {
-    marginLeft: 15,
+    justifyContent: 'center',
+    height: 35,
+    width: 150,
+    marginBottom: 10,
   },
 });

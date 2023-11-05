@@ -6,6 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { createUserWithEmailAndPassword } from '@firebase/auth';
 import { firebaseAuth } from '../firebase/firebaseAuth';
+import { usePutUserMutation } from '../services/pacApi';
 
 const Register = () => {
   const navigation = useNavigation();
@@ -14,6 +15,9 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
+  // eslint-disable-next-line no-unused-vars
+  const [addUser, result] = usePutUserMutation();
+
   const handleRegister = async () => {
     try {
       const response = await createUserWithEmailAndPassword(
@@ -21,9 +25,15 @@ const Register = () => {
         email,
         password
       );
-      console.log(response);
+      await addUser({
+        email: response.user.email,
+        uid: response.user.uid,
+        contactNumber: '',
+        image:
+          'https://cdn.iconscout.com/icon/free/png-256/free-avatar-370-456322.png?f=webp',
+      });
 
-      navigation.navigate("Login");
+      navigation.navigate('Login');
     } catch (error) {
       console.log('Ocurrió un error en el registro:', error);
     }

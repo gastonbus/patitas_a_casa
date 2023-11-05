@@ -17,7 +17,7 @@ const Search = ({ searchText, setSearchText, resultsLength }) => {
           <AntDesign name="closecircleo" size={25} color={colors.darkBlue} />
         </Pressable>
       </View>
-      <Text style={styles.resultLength}>{resultsLength} mascotas</Text>
+      <Text style={styles.resultLength}>{resultsLength} mascotas encontradas</Text>
     </View>
   );
 };

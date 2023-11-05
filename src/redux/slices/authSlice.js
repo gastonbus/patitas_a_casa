@@ -5,6 +5,7 @@ const authSlice = createSlice({
   initialState: {
     user: null,
     idToken: null,
+    uid: null,
   },
 
   reducers: {
@@ -14,6 +15,9 @@ const authSlice = createSlice({
     setIdToken: (state, action) => {
       state.idToken = action.payload;
     },
+    setUid: (state, action) => {
+      state.uid = action.payload;
+    },
     // eslint-disable-next-line no-unused-vars
     clearUser: (state, action) => {
       state.user = "";
@@ -22,6 +26,6 @@ const authSlice = createSlice({
   }
 });
 
-export const {setUser, setIdToken, clearUser} = authSlice.actions;
+export const {setUser, setIdToken, setUid, clearUser} = authSlice.actions;
 
 export default authSlice.reducer;

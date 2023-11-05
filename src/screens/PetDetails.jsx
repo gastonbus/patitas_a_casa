@@ -1,5 +1,12 @@
 /* eslint-disable react/prop-types */
-import { StyleSheet, View, Image, Pressable, ScrollView, Linking } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  Pressable,
+  ScrollView,
+  Linking,
+} from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import { colors } from '../theme/colors';
 import { AntDesign } from '@expo/vector-icons';
@@ -8,13 +15,14 @@ import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
 const PetDetails = () => {
-
   const navigation = useNavigation();
 
   const pet = useSelector((state) => state.homeSlice.selectedPet);
 
-  const yesIcon = <AntDesign name="checkcircle" size={14} color={colors.darkOlive} />
-  const noIcon = <AntDesign name="closecircle" size={14} color={colors.red} />
+  const yesIcon = (
+    <AntDesign name="checkcircle" size={14} color={colors.darkOlive} />
+  );
+  const noIcon = <AntDesign name="closecircle" size={14} color={colors.red} />;
 
   const callNumber = () => {
     Linking.openURL(`tel:${pet.contactNumber}`);
@@ -42,11 +50,12 @@ const PetDetails = () => {
             <View style={{ flexDirection: 'row', marginTop: 5 }}>
               <Text variant="bodyLarge" style={{ marginRight: 10 }}>
                 Collar{' '}
-                {pet.leash === "Correa y collar" || pet.leash === "Solo collar" ? yesIcon : noIcon}
+                {pet.leash === 'Correa y collar' || pet.leash === 'Solo collar'
+                  ? yesIcon
+                  : noIcon}
               </Text>
               <Text variant="bodyLarge" style={{ marginLeft: 10 }}>
-                Correa{' '}
-                {pet.leash === "Correa y collar" ? yesIcon : noIcon}
+                Correa {pet.leash === 'Correa y collar' ? yesIcon : noIcon}
               </Text>
             </View>
           </View>
@@ -56,20 +65,19 @@ const PetDetails = () => {
         mode="contained"
         buttonColor={colors.lightBlue}
         style={styles.button}
-        onPress={() => navigation.navigate("PetLoc") }
+        onPress={() => navigation.navigate('PetLoc')}
       >
         Ver ubicación en mapa
       </Button>
 
       <View style={styles.finderDetails}>
         <Text variant="bodyLarge" style={styles.finderDetailsText}>
-          Publicado por:{' '}
-          <Text style={styles.boldText}>{'mascotero74@gmail.com'}</Text>
+          Publicado por: <Text style={styles.boldText}>{pet.finder}</Text>
         </Text>
         <Text variant="bodyLarge" style={styles.finderDetailsText}>
           Nro. de contacto:{' '}
           <Text style={{ fontWeight: 'bold', color: colors.darkBlue }}>
-            {'+5401234567'}
+            {pet.contactNumber}
           </Text>
         </Text>
         <Pressable onPress={callNumber}>

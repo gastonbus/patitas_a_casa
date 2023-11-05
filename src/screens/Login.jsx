@@ -6,10 +6,9 @@ import { useNavigation } from '@react-navigation/native';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 import { firebaseAuth } from '../firebase/firebaseAuth';
 import { useDispatch } from 'react-redux';
-import { setIdToken, setUser } from '../redux/slices/authSlice';
+import { setIdToken, setUid, setUser } from '../redux/slices/authSlice';
 
 const Login = () => {
-
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
@@ -20,14 +19,19 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await signInWithEmailAndPassword(firebaseAuth, email, password);
-      console.log(response);
+      const response = await signInWithEmailAndPassword(
+        firebaseAuth,
+        email,
+        password
+      );
+      // console.log(response);
       dispatch(setUser(response.user.email));
-      dispatch(setIdToken(response._tokenResponse.idToken))
+      dispatch(setUid(response.user.uid));
+      dispatch(setIdToken(response._tokenResponse.idToken));
     } catch (error) {
-      console.log("Ocurrió un error al intentar ingresar:", error);
+      console.log('Ocurrió un error al intentar ingresar:', error);
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -87,7 +91,7 @@ const Login = () => {
         <Button
           mode="text"
           textColor={colors.darkBlue}
-          onPress={() => navigation.navigate("Register")}
+          onPress={() => navigation.navigate('Register')}
         >
           Registrate!
         </Button>
