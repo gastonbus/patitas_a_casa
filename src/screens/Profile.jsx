@@ -6,11 +6,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import { useGetUserDetailsQuery, usePutUserMutation } from '../services/pacApi';
 import ProfileField from '../components/ProfileField';
-import { MaterialIcons } from '@expo/vector-icons';
 import { clearUser } from '../redux/slices/authSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 
 const Profile = () => {
   const uid = useSelector((state) => state.authSlice.uid);
+
   const { data: userDetails, refetch } = useGetUserDetailsQuery(uid);
 
   // eslint-disable-next-line no-unused-vars
@@ -84,16 +86,28 @@ const Profile = () => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem('user');
+      dispatch(clearUser());
+    } catch (error) {
+      console.log('Ocurrió un error al intentar cerrar sesión.');
+    }
+  };
+
+  const onLogout = () => {
+    Alert.alert('Cerrar sesión', '¿Está seguro que desea cerrar sesión?', [
+      {
+        text: 'No',
+        style: 'cancel',
+      },
+      { text: 'Si', onPress: () => handleLogout() },
+    ]);
+  };
   return (
     <PaperProvider>
       <ScrollView style={styles.container}>
         <View style={styles.infoContainer}>
-          <Pressable onPress={() => dispatch(clearUser())}>
-            <View style={styles.logout}>
-              <Text style={{ color: colors.darkBlue }}>Logout </Text>
-              <MaterialIcons name="logout" size={24} color={colors.darkBlue} />
-            </View>
-          </Pressable>
           <Image
             style={styles.image}
             source={{
@@ -106,6 +120,9 @@ const Profile = () => {
             </Pressable>
             <Pressable onPress={pickImage}>
               <FontAwesome name="picture-o" size={36} color={colors.darkBlue} />
+            </Pressable>
+            <Pressable onPress={onLogout}>
+              <FontAwesome name="sign-out" size={36} color={colors.darkBlue} />
             </Pressable>
           </View>
           <View style={styles.existingProfileDataContainer}>
@@ -147,7 +164,7 @@ const styles = StyleSheet.create({
     borderRadius: 200,
   },
   buttonsContainer: {
-    width: 100,
+    width: '50%',
     marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
