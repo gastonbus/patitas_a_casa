@@ -14,16 +14,25 @@ export const pacApi = createApi({
     getPets: builder.query({
       query: () => 'pets.json',
     }),
+    getUserDetails: builder.query({
+      query: (uid) => ({
+        url: `users/${uid}.json`,
+      }),
+    }),
+    putPet: builder.mutation({
+      query: async (petData) => {
+        return {
+          url: 'pets.json',
+          method: 'PUT',
+          body: petData,
+        };
+      },
+    }),
     putUser: builder.mutation({
       query: (userData) => ({
         url: `users/${userData.uid}.json`, // Asignar UID proporcionado en la URL
         method: 'PUT', // Usar PUT en lugar de POST para escribir en un ID específico
         body: userData, // Usar data para el cuerpo de la solicitud
-      }),
-    }),
-    getUserDetails: builder.query({
-      query: (uid) => ({
-        url: `users/${uid}.json`,
       }),
     }),
   }),
@@ -32,6 +41,7 @@ export const pacApi = createApi({
 export const {
   useGetCategoriesQuery,
   useGetPetsQuery,
-  usePutUserMutation,
   useGetUserDetailsQuery,
+  usePutPetMutation,
+  usePutUserMutation,
 } = pacApi;

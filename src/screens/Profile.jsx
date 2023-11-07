@@ -9,6 +9,7 @@ import ProfileField from '../components/ProfileField';
 import { clearUser } from '../redux/slices/authSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Profile = () => {
   const uid = useSelector((state) => state.authSlice.uid);
@@ -122,21 +123,27 @@ const Profile = () => {
               <FontAwesome name="picture-o" size={36} color={colors.darkBlue} />
             </Pressable>
             <Pressable onPress={onLogout}>
-              <FontAwesome name="sign-out" size={36} color={colors.darkBlue} />
+              <FontAwesome name="sign-out" size={36} color={colors.red} />
             </Pressable>
           </View>
-          <View style={styles.existingProfileDataContainer}>
-            <ProfileField
-              field={'name'}
-              userDetails={userDetails}
-              onUpdateField={onUpdateField}
-            />
-            <ProfileField
-              field={'contactNumber'}
-              userDetails={userDetails}
-              onUpdateField={onUpdateField}
-            />
-          </View>
+          {result.status === 'pending' ? (
+            <View style={styles.existingProfileDataContainer}>
+              <LoadingSpinner color={colors.ultraLightBlue} />
+            </View>
+          ) : (
+            <View style={styles.existingProfileDataContainer}>
+              <ProfileField
+                field={'name'}
+                userDetails={userDetails}
+                onUpdateField={onUpdateField}
+              />
+              <ProfileField
+                field={'contactNumber'}
+                userDetails={userDetails}
+                onUpdateField={onUpdateField}
+              />
+            </View>
+          )}
           <Text variant="bodyLarge" style={styles.bottomText}>
             Estos son tus datos registrados en Patitas a Casa. Por favor,
             mantenelos actualizados para facilitar el encuentro entre las
@@ -171,11 +178,13 @@ const styles = StyleSheet.create({
   },
   existingProfileDataContainer: {
     width: '80%',
+    height: 100,
     marginTop: 20,
     backgroundColor: colors.darkBlue,
     borderRadius: 20,
     padding: 20,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   bottomText: {
     width: '80%',

@@ -18,14 +18,17 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleLogin = async () => {
     try {
+      setIsLoading(true);
       const response = await signInWithEmailAndPassword(
         firebaseAuth,
         email,
         password
       );
-      // console.log(response);
+      console.log('firebase response', response);
       await AsyncStorage.setItem(
         'user',
         JSON.stringify({
@@ -36,8 +39,10 @@ const Login = () => {
       dispatch(setUser(response.user.email));
       dispatch(setUid(response.user.uid));
       dispatch(setIdToken(response._tokenResponse.idToken));
+      setIsLoading(false);
     } catch (error) {
       console.log('Ocurrió un error al intentar ingresar:', error);
+      navigation.navigate('ErrorMessage', { message: error });
     }
   };
 
@@ -88,7 +93,7 @@ const Login = () => {
       <Button
         mode="contained"
         buttonColor={colors.lightBlue}
-        loading={false} //TODO: modificar luego colocandole una variable de estado
+        loading={isLoading}
         onPress={handleLogin}
         style={styles.loginButton}
       >

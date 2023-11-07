@@ -49,13 +49,7 @@ const PetDetails = () => {
             <Text variant="bodyLarge">Edad estimada: {pet.estimatedAge}.</Text>
             <View style={{ flexDirection: 'row', marginTop: 5 }}>
               <Text variant="bodyLarge" style={{ marginRight: 10 }}>
-                Collar{' '}
-                {pet.leash === 'Correa y collar' || pet.leash === 'Solo collar'
-                  ? yesIcon
-                  : noIcon}
-              </Text>
-              <Text variant="bodyLarge" style={{ marginLeft: 10 }}>
-                Correa {pet.leash === 'Correa y collar' ? yesIcon : noIcon}
+                Collar {pet.collar ? yesIcon : noIcon}
               </Text>
             </View>
           </View>

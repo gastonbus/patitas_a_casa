@@ -10,14 +10,16 @@ const Search = ({ searchText, setSearchText, resultsLength }) => {
         <TextInput
           style={styles.searchInput}
           value={searchText}
-          placeholder="Escriba aquí"
+          placeholder="Filtrar por ciudad o provincia"
           onChangeText={(value) => setSearchText(value)}
         />
         <Pressable style={styles.clearIcon} onPress={() => setSearchText('')}>
           <AntDesign name="closecircleo" size={25} color={colors.darkBlue} />
         </Pressable>
       </View>
-      <Text style={styles.resultLength}>{resultsLength} mascotas encontradas</Text>
+      <Text style={styles.resultLength}>
+        {resultsLength} mascotas encontradas
+      </Text>
     </View>
   );
 };
@@ -41,16 +43,16 @@ const styles = StyleSheet.create({
     height: 40,
     padding: 10,
     backgroundColor: colors.ultraLightBlue,
-		borderWidth: 1,
-		borderColor: colors.darkBlue,
-		color: colors.darkBlue,
+    borderWidth: 1,
+    borderColor: colors.darkBlue,
+    color: colors.darkBlue,
   },
   clearIcon: {
     marginLeft: 15,
   },
-	resultLength: {
-		color: colors.darkBlue,
-		fontSize: 16,
-		marginTop: 5,
-	}
+  resultLength: {
+    color: colors.darkBlue,
+    fontSize: 16,
+    marginTop: 5,
+  },
 });

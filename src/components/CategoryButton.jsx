@@ -7,15 +7,14 @@ import { useDispatch } from 'react-redux';
 import { setCategory } from '../redux/slices/homeSlice';
 
 const CategoryButton = ({ categoryName }) => {
-
   const navigation = useNavigation();
-  
+
   const dispatch = useDispatch();
 
   const onSelectCategory = () => {
     dispatch(setCategory(categoryName));
     navigation.navigate('Pets');
-  }
+  };
 
   return (
     <Button
@@ -34,7 +33,7 @@ export default CategoryButton;
 
 const styles = StyleSheet.create({
   button: {
-    alignSelf: "center",
+    alignSelf: 'center',
     height: 45,
     width: '60%',
     marginVertical: 5,

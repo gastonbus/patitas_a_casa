@@ -4,11 +4,31 @@ import { colors } from '../theme/colors';
 import { Text } from 'react-native-paper';
 import CategoryButton from '../components/CategoryButton';
 import { FlatList } from 'react-native';
-import { useGetCategoriesQuery } from '../services/pacApi';
+import { useGetCategoriesQuery, useGetPetsQuery } from '../services/pacApi';
+import { useDispatch } from 'react-redux';
+import { setAllPets, setAllcategories } from '../redux/slices/homeSlice';
+import { useEffect } from 'react';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Categories = () => {
+  const { data: categories, isLoadingCategories } = useGetCategoriesQuery();
+  const { data: pets, isLoadingPets } = useGetPetsQuery();
 
-  const { data: petsCategories } = useGetCategoriesQuery();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (pets) {
+      dispatch(setAllPets(pets));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pets]);
+
+  useEffect(() => {
+    if (categories) {
+      dispatch(setAllcategories(categories));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categories]);
 
   return (
     <>
@@ -17,13 +37,16 @@ const Categories = () => {
       <Text variant="headlineSmall" style={styles.text}>
         ¿Qué tipo de mascota se te perdió?
       </Text>
-
-      <FlatList
-        data={petsCategories}
-        keyExtractor={(item) => item}
-        renderItem={({ item }) => <CategoryButton categoryName={item} />}
-        style={styles.flatList}
-      />
+      {isLoadingCategories || isLoadingPets ? (
+        <LoadingSpinner />
+      ) : (
+        <FlatList
+          data={categories}
+          keyExtractor={(item) => item}
+          renderItem={({ item }) => <CategoryButton categoryName={item} />}
+          style={styles.flatList}
+        />
+      )}
     </>
   );
 };
@@ -41,7 +64,7 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     marginTop: 10,
     marginBottom: 15,
-    alignSelf: "center"
+    alignSelf: 'center',
   },
   flatList: {
     width: '100%',

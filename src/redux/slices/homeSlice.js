@@ -1,26 +1,35 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { petsCategories } from '../../data/petsCategories-borrar';
-import { pets } from '../../data/pets-borrar';
 
 const homeSlice = createSlice({
   name: 'home',
   initialState: {
-    categories: petsCategories,
-    allPets: pets,
+    categories: [],
+    allPets: [],
     selectedCategory: '',
     filteredPetsByCategory: [],
     selectedPet: {},
   },
   reducers: {
+    setAllcategories: (state, action) => {
+      state.categories = action.payload;
+      console.log('Pasó por setAllCategories');
+    },
+    setAllPets: (state, action) => {
+      state.allPets = action.payload;
+      console.log('Pasó por setAllPets');
+    },
     setCategory: (state, action) => {
       state.selectedCategory = action.payload;
-      state.filteredPetsByCategory = state.allPets.filter( (pet) => pet.category === state.selectedCategory);
+      state.filteredPetsByCategory = state.allPets.filter(
+        (pet) => pet.category === state.selectedCategory
+      );
     },
     setSelectedPet: (state, action) => {
       state.selectedPet = action.payload;
-    }
+    },
   },
 });
 
-export const { setCategory, setSelectedPet } = homeSlice.actions;
+export const { setCategory, setAllcategories, setAllPets, setSelectedPet } =
+  homeSlice.actions;
 export default homeSlice.reducer;

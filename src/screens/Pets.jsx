@@ -10,20 +10,23 @@ const Pets = () => {
     (state) => state.homeSlice.filteredPetsByCategory
   );
 
+  console.log(
+    'filteredPetsByCategory',
+    JSON.stringify(filteredPetsByCategory, null, 2)
+  );
   const [searchText, setSearchText] = useState('');
-
   const [filteredPetsBySearch, setFilteredPetsBySearch] = useState(
     filteredPetsByCategory
   );
-
   useEffect(() => {
     setFilteredPetsBySearch(
       filteredPetsByCategory.filter((pet) =>
-        pet.description.toLowerCase().includes(searchText.toLowerCase())
+        (pet.city + ' ' + pet.province)
+          .toLowerCase()
+          .includes(searchText.toLowerCase())
       )
     );
   }, [filteredPetsByCategory, searchText]);
-
   return (
     <>
       <Search

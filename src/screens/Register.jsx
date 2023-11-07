@@ -16,7 +16,10 @@ const Register = () => {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true);
 
   // eslint-disable-next-line no-unused-vars
-  const [addUser, result] = usePutUserMutation();
+  const [putUser, result] = usePutUserMutation();
+
+  const { status } = result;
+  console.log('status', JSON.stringify(status, null, 2));
 
   const handleRegister = async () => {
     try {
@@ -25,7 +28,8 @@ const Register = () => {
         email,
         password
       );
-      await addUser({
+      console.log(response);
+      await putUser({
         email: response.user.email,
         uid: response.user.uid,
         contactNumber: '',
@@ -36,6 +40,7 @@ const Register = () => {
       navigation.navigate('Login');
     } catch (error) {
       console.log('Ocurrió un error en el registro:', error);
+      navigation.navigate('ErrorMessage', { message: error });
     }
   };
 
@@ -81,7 +86,7 @@ const Register = () => {
       <Button
         mode="contained"
         buttonColor={colors.lightBlue}
-        loading={false} //TODO: modificar luego colocandole una variable de estado
+        loading={status === 'pending'}
         onPress={handleRegister}
         style={styles.loginButton}
       >

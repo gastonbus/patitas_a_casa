@@ -36,7 +36,7 @@ const PetItem = ({ pet }) => {
           buttonColor={colors.lightBlue}
           onPress={onSelectPet}
         >
-          Ver detalle
+          Ver detalles
         </Button>
       </Card.Actions>
     </Card>
