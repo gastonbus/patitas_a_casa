@@ -68,14 +68,14 @@ const Profile = () => {
 
   const openCamera = async () => {
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-    console.log('permissionResult', permissionResult);
+    // console.log('permissionResult', permissionResult);
     if (!permissionResult.granted) {
       console.log('Permiso NO otorgado');
     } else {
       const result = await ImagePicker.launchCameraAsync({
         base64: true,
       });
-      console.log('result', result);
+      // console.log('result', result);
 
       if (!result.canceled) {
         await onUpdateField(

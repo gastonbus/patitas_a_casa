@@ -36,7 +36,7 @@ const PostPet = () => {
 
   const { errors, isSubmitting } = formState;
 
-  console.log(selectedImage);
+  // console.log(selectedImage);
 
   // eslint-disable-next-line no-unused-vars
   const [postPet, result] = usePutPetMutation();
@@ -83,14 +83,14 @@ const PostPet = () => {
 
   const openCamera = async () => {
     const permissionResult = await ImagePicker.requestCameraPermissionsAsync();
-    console.log('permissionResult', permissionResult);
+    // console.log('permissionResult', permissionResult);
     if (!permissionResult.granted) {
       console.log('Permiso NO otorgado');
     } else {
       const result = await ImagePicker.launchCameraAsync({
         base64: true,
       });
-      console.log('result', result);
+      // console.log('result', result);
 
       if (!result.canceled) {
         setSelectedImage(
@@ -117,7 +117,7 @@ const PostPet = () => {
   return (
     <ScrollView>
       <View style={styles.container}>
-        <Text style={styles.text}>
+        <Text style={styles.alertText}>
           Antes de publicar un animal, es necesario que verifiques que el email
           y el teléfono cargados en tu perfil sean correctos.
         </Text>
@@ -444,12 +444,21 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     marginBottom: 20,
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   text: {
     color: colors.darkBlue,
     alignSelf: 'center',
+    // marginBottom: 10,
+    textAlign: 'center',
+  },
+  alertText: {
+    color: colors.red,
+    alignSelf: 'center',
     marginBottom: 10,
+    fontFamily: 'Agbalumo',
+    fontSize: 24,
+    textAlign: 'center',
   },
   resultText: {
     color: colors.darkOlive,
@@ -461,6 +470,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     marginBottom: 20,
+    marginTop: 10,
   },
   resetButton: {
     borderColor: colors.darkBlue,

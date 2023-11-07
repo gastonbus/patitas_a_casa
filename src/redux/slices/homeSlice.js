@@ -12,11 +12,11 @@ const homeSlice = createSlice({
   reducers: {
     setAllcategories: (state, action) => {
       state.categories = action.payload;
-      console.log('Pasó por setAllCategories');
+      // console.log('Pasó por setAllCategories');
     },
     setAllPets: (state, action) => {
       state.allPets = action.payload;
-      console.log('Pasó por setAllPets');
+      // console.log('Pasó por setAllPets');
     },
     setCategory: (state, action) => {
       state.selectedCategory = action.payload;

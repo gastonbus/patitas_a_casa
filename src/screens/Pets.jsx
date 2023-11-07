@@ -10,10 +10,10 @@ const Pets = () => {
     (state) => state.homeSlice.filteredPetsByCategory
   );
 
-  console.log(
-    'filteredPetsByCategory',
-    JSON.stringify(filteredPetsByCategory, null, 2)
-  );
+  // console.log(
+  //   'filteredPetsByCategory',
+  //   JSON.stringify(filteredPetsByCategory, null, 2)
+  // );
   const [searchText, setSearchText] = useState('');
   const [filteredPetsBySearch, setFilteredPetsBySearch] = useState(
     filteredPetsByCategory

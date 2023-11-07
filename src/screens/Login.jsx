@@ -28,7 +28,7 @@ const Login = () => {
         email,
         password
       );
-      console.log('firebase response', response);
+      // console.log('firebase response', response);
       await AsyncStorage.setItem(
         'user',
         JSON.stringify({

@@ -19,7 +19,7 @@ const Register = () => {
   const [putUser, result] = usePutUserMutation();
 
   const { status } = result;
-  console.log('status', JSON.stringify(status, null, 2));
+  // console.log('status', JSON.stringify(status, null, 2));
 
   const handleRegister = async () => {
     try {
@@ -28,7 +28,7 @@ const Register = () => {
         email,
         password
       );
-      console.log(response);
+      // console.log(response);
       await putUser({
         email: response.user.email,
         uid: response.user.uid,
